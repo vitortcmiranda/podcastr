@@ -27,13 +27,15 @@ type HomeProps = {
 
 }
 export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
-  const { play } = useContext(PlayerContext);
+  const { playList } = useContext(PlayerContext);
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
   return (
     <div className={styles.homePage}>
       <section className={styles.latestEpisodes}>
         <h2>Últimos lançamentos </h2>
         <ul>
-          {latestEpisodes.map(ep => {
+          {latestEpisodes.map((ep, index) => {
             return (
               <li key={ep.id}>
                 <Image 
@@ -52,7 +54,7 @@ export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
                   <span>{ep.durationAsString}</span>
 
                 </div>
-                <button type='button' onClick={() => { play(ep) }}>
+                <button type='button' onClick={() => { playList(episodeList, index + latestEpisodes.length) }}>
                   <img src="/play-green.svg" alt="Tocar episódio" width={20} height={20}/>
                 </button>
               </li>
