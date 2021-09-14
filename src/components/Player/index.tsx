@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { PlayerContext } from '../../contexts/PlayerContext';
-import Image from 'next/image'
+import Image from 'next/image';
 import styles from './styles.module.scss';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css'
 
 export default function Player() {
     const { episodeList, currentEpisodeIndex } = useContext(PlayerContext);
@@ -35,25 +37,33 @@ export default function Player() {
             <div className={styles.progress}>
                 <span>00:00</span>
                 <div className={styles.slider}>
-                    <div className={styles.emptySlider} />
+                    { episode ? (
+                        <Slider 
+                            trackStyle={{ backgroundColor: '#04d361' }}
+                            railStyle= {{ backgroundColor: '#9f75ff'}}
+                            handleStyle= {{ borderColor: '#04d361'}}
+                        /> 
+                    ) : (
+                        <div className={styles.emptySlider} />
+                    )}
                 </div>
                 <span>00:00</span>
             </div>
 
             <div className={styles.buttons}>
-                <button className="" type="button">
+                <button className="" type="button" disabled={!episode}>
                     <img src="/shuffle.svg" alt="Embaralhar"  />
                 </button>
-                <button className="" type="button">
+                <button className="" type="button" disabled={!episode}>
                     <img src="/play-previous.svg" alt="Tocar anterior"  />
                 </button>
-                <button className={styles.playButton} type="button">
+                <button className={styles.playButton} type="button" disabled={!episode}>
                     <img src="/play.svg" alt="Tocar"  />
                 </button>
-                <button className="" type="button">
+                <button className="" type="button" disabled={!episode}>
                     <img src="/play-next.svg" alt="Tocar próxima"/>
                 </button>
-                <button className="" type="button">
+                <button className="" type="button" disabled={!episode}>
                     <img src="/repeat.svg" alt="Repetir"/>
                 </button>
             </div>
