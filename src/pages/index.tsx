@@ -7,6 +7,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './home.module.scss'
+import { useContext } from "react"
+import { PlayerContext } from "../contexts/PlayerContext"
 
 type Episode = {
     id: string;
@@ -25,10 +27,11 @@ type HomeProps = {
 
 }
 export default function Home({latestEpisodes, allEpisodes}: HomeProps) {
+  const player = useContext(PlayerContext);
   return (
     <div className={styles.homePage}>
       <section className={styles.latestEpisodes}>
-        <h2>Últimos lançamentos</h2>
+        <h2>Últimos lançamentos {player}</h2>
         <ul>
           {latestEpisodes.map(ep => {
             return (
