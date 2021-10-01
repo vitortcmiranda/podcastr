@@ -10,7 +10,7 @@ import { PlayerContextProvider } from '../contexts/PlayerContext';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <PlayerContextProvider>
+    <PlayerContextProvider >
       <div className={styles.wrapper}>
         <main className={styles.main}>
           <Header />
